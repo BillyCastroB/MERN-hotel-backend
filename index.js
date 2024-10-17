@@ -1,8 +1,13 @@
 import express from 'express';
 import { conexion } from './db/conexion.js';
-const app = express();
+import habitacionRouter from './routes/habitacionesRouter.js';
+import reservarRouter from './routes/reservasRouter.js'
+import loginRouter from './routes/loginRouter.js'
 
-const PORT = process.env.PORT || 5000;
+
+const app = express();
+app.use(express.json())
+const PORT = process.env.PORT || 4000;
 
 conexion();
 
@@ -10,16 +15,10 @@ app.listen(PORT, ()=>{
     console.log(`servidor funcionando en el puerto ${PORT}`)
 });
 
-app.use('/habitaciones', (req, res)=>{
-    res.send('desde habitaciones');
-})
-app.use('/Login', (req, res)=>{
-    res.send('desde login');
-})
+app.use('/habitaciones', habitacionRouter)
+app.use('/reservar', reservarRouter);
+app.use('/login', loginRouter);
+
 app.use('/panel', (req, res)=>{
     res.send('desde panel');
 })
-app.use('/reservar', (req, res)=>{
-    res.send('desde reservar');
-})
-

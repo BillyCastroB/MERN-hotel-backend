@@ -13,10 +13,6 @@ export const AdminSchema = mongoose.Schema({
     },
     token: {
         type: String
-    },
-    connfirmado:{
-        type: Boolean,
-        default: false
     }
 })
 
